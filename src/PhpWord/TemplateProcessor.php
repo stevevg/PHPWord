@@ -456,7 +456,7 @@ class TemplateProcessor
         $fixedDocumentPart = $documentPart;
 
         $fixedDocumentPart = preg_replace_callback(
-            '|\$[^{]*\{[^}]*\}|U',
+            '|\[[^\[]*\[[^\]]*\]|U',
             function ($match) {
                 return strip_tags($match[0]);
             },
@@ -496,7 +496,7 @@ class TemplateProcessor
      */
     protected function getVariablesForPart($documentPartXML)
     {
-        preg_match_all('/\$\{(.*?)}/i', $documentPartXML, $matches);
+        preg_match_all('/\[\[(.*?)\]\]/i', $documentPartXML, $matches);
 
         return $matches[1];
     }
